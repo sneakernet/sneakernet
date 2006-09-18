@@ -38,12 +38,12 @@
              author="true"
              version="true"
              use="true"
-             windowtitle="Internet Without Borders - ${ant.project.name}">
-      <fileset dir="src" defaultexcludes="yes">
-	<include name="**"/>
+             windowtitle="Information Without Borders - ${ant.project.name}">
+      <fileset dir="${src}" defaultexcludes="yes">
+	<include name="**.java"/>
       </fileset>
       <doctitle><![CDATA[<h1>Test</h1>]]></doctitle>
-      <bottom><![CDATA[<i>Copyright &#169; 2006 Internet Without Borders. All Rights Reserved.</i>]]></bottom>
+      <bottom><![CDATA[<i>Copyright &#169; 2006 <a href="http://informationwithoutborders.endymion.com">Information Without Borders</a>. All Rights Reserved.</i>]]></bottom>
       <link href="http://developer.java.sun.com/developer/products/xml/docs/api/"/>
       <group title="IWB" packages="org.iwb*"/>
     </javadoc>
