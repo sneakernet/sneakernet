@@ -7,8 +7,8 @@ package org.iwb.simulator;
  * href="http://informationwithoutborders.endymion.com/index.php?title=Simulator_Code">Simulator
  * Code</a> project.
  * <p>
- * Copyright (c) 2006 Information Without Borders Licensed under the
- * GNU General Public License.
+ * Copyright (c) 2006 <a href="http://informationwithoutborders.endymion.com">Information Without Borders</a><br>
+ * Licensed under the <a href="http://www.gnu.org/copyleft/gpl.html">GNU General Public License</a>.
  *
  * @see <a href="http://informationwithoutborders.endymion.com/index.php?title=Simulator_Code">Simulator Code</a>
  *
