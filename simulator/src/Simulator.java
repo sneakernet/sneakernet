@@ -12,7 +12,7 @@ package org.iwb.simulator;
  * Code</a> project.
  * @see <a href="http://informationwithoutborders.endymion.com/index.php?title=Simulator_Code">Simulator Code</a>
  * @author <a href="http://informationwithoutborders.endymion.com">Information Without Borders</a> by $Author$
- * @version $Revision: 0 $
+ * @version $Revision$
  */
 public class Simulator
 {
