@@ -3,43 +3,61 @@
     <description>
         simple example build file
     </description>
-  <!-- set global properties for this build -->
   <property name="src" location="src"/>
   <property name="build" location="build"/>
   <property name="dist"  location="dist"/>
+  <property name="docs"  location="docs"/>
 
-  <target name="init">
+  <target name="init"
+        description="initialize">
     <echo message="${ant.project.name} - build-common.init"/>
     <!-- Create the time stamp -->
     <tstamp/>
-    <!-- Create the build directory structure used by compile -->
     <mkdir dir="${build}"/>
   </target>
 
   <target name="compile" depends="init"
-        description="compile the source " >
+        description="compile the source ">
     <echo message="${ant.project.name} - build-common.compile"/>
-    <!-- Compile the java code from ${src} into ${build} -->
     <javac srcdir="${src}" destdir="${build}"/>
   </target>
 
   <target name="dist" depends="compile"
-        description="generate the distribution" >
+        description="generate the distribution">
     <echo message="${ant.project.name} - build-common.dist"/>
-
-    <!-- Put everything in ${build} into IWB-[PROJECT]-${DSTAMP}.jar -->
+    <mkdir dir="${dist}"/>
     <jar jarfile="${dist}/IWB-${ant.project.name}-${DSTAMP}.jar" basedir="${build}"/>
+  </target>
+
+  <target name="docs" depends="compile"
+        description="generate the documentation">
+    <javadoc packagenames="org.iwb*"
+             sourcepath="src"
+             defaultexcludes="yes"
+             destdir="docs"
+             author="true"
+             version="true"
+             use="true"
+             windowtitle="Internet Without Borders - ${ant.project.name}">
+      <fileset dir="src" defaultexcludes="yes">
+	<include name="**"/>
+      </fileset>
+      <doctitle><![CDATA[<h1>Test</h1>]]></doctitle>
+      <bottom><![CDATA[<i>Copyright &#169; 2006 Internet Without Borders. All Rights Reserved.</i>]]></bottom>
+      <link href="http://developer.java.sun.com/developer/products/xml/docs/api/"/>
+      <group title="IWB" packages="org.iwb*"/>
+    </javadoc>
   </target>
 
   <target name="clean"
         description="clean up" >
     <echo message="${ant.project.name} - build-common.clean"/>
-    <!-- Delete the ${build} and ${dist} directory trees -->
     <delete dir="${build}"/>
     <delete dir="${dist}"/>
+    <delete dir="${docs}"/>
   </target>
 
-    <target name="dist.dependencies">
-        <antcall target="depend.${ant.project.name}"/>
-    </target>
+  <target name="dist.dependencies">
+      <antcall target="depend.${ant.project.name}"/>
+  </target>
 </project>

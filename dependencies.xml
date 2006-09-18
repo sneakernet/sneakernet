@@ -3,7 +3,7 @@
     <dirname property="dependencies.basedir" file="${ant.file.dependencies}"/>
     <!-- ================================================================== -->
     <target name="depend.all"
-            depends="depend.server, depend.user">
+            depends="depend.server, depend.user, depend.simulator">
     </target>
     <!-- ================================================================== -->
     <target name="depend.server"
