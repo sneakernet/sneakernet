@@ -4,10 +4,13 @@
 
 package org.iwb.simulator;
 
+import org.iwb.*;
+
 /**
  * This application simulates a sneakernet to Cuba.
  */
 public class CubaSimulator
+    extends Simulator
 {
     public static void main(String[] args)
     {
