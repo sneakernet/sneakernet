@@ -19,6 +19,18 @@ import java.util.*;
 public class Simulator
 {
     /**
+     * Definition of a unit in time, for the logs.  Singular.
+     */
+    String strTimeUnit;
+
+    /**
+     * Definintion of a unit in time in plural, for the logs.  These two
+     * values are the only thing that you need to change in order to change
+     * the unit of time that a simulation uses.
+     */
+    String strTimeUnits;
+
+    /**
      * The Locations covered in this simulator, where Data Carriers reside
      * and potentially gossip with one another.
      */
@@ -33,8 +45,11 @@ public class Simulator
     /**
      * Set up some default stuff.
      */
-    public Simulator()
+    public Simulator(String strTimeUnit, String strTimeUnits)
     {
+	this.strTimeUnit = strTimeUnit;
+	this.strTimeUnits = strTimeUnits;
+
 	vLocations = new Vector();
 	vDataCarriers = new Vector();
     }
@@ -44,13 +59,17 @@ public class Simulator
      */
     public void simulate()
     {
+	// Log the unit of time for this simulation.
+	System.out.println();
+	System.out.println("Time unit: " + strTimeUnits);
+
 	// Print a list of locations to the log.
 	System.out.println();
 	System.out.println("Locations:");
 	for(int index=0;index < vLocations.size();index++)
 	{
 	    Location location = (Location) vLocations.elementAt(index);
-	    System.out.println(location.strName);
+	    System.out.println("    " + location.strName);
 	}
 
 	// Print a list of locations to the log.
@@ -60,7 +79,7 @@ public class Simulator
 	{
 	    DataCarrier dataCarrier =
 		(DataCarrier) vDataCarriers.elementAt(index);
-	    System.out.println(dataCarrier.strName);
+	    System.out.println("    " + dataCarrier.strName);
 	}
     }
 }

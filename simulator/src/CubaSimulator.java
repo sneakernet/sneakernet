@@ -16,14 +16,16 @@ class CubaSimulator
     extends Simulator
 {
     /**
-     * Runs this simulator.  You can invoke this using with "java
-     * CubaSimulator" on the command line.
+     * Runs this simulator.  You can run this using with "java
+     * org.iwb.CubaSimulator" on the command line from the "build"
+     * directory after you compile with "ant compile" from the
+     * "simulator" directory.
      */
     public static void main(String[] args)
     {
         System.out.println("Cuba Simulator");
 
-	// Create a new simulation;
+	// Create a new simulation.
 	CubaSimulator simulation = new CubaSimulator();
 
 	// Run the simulation.
@@ -35,29 +37,19 @@ class CubaSimulator
      */
     public CubaSimulator()
     {
-	////////////////////////////////////////////////////////////
-	// Set up the Locations in this simulation.
+	// This simulation uses hours as a unit of time.
+	super("hour", "hours");
 
+	// Set up the Locations in this simulation.
+	vLocations.add(new Location("Miami International Airport", 0.1));
 	// The two parameters for a location are the location's name,
 	// and the chance that two data carriers in that location have
 	// of gossiping per time unit.
-	vLocations.add(new Location("Miami International Airport", 0.1));
-
 	vLocations.add(new Location("Havana Airport", 0.1));
 
-	// Locations are set up.
-	////////////////////////////////////////////////////////////
-
-	////////////////////////////////////////////////////////////
 	// Set up the Data Carriers in this simulation.
-
 	vDataCarriers.add(new DataCarrier("Alex's PDA"));
-
 	vDataCarriers.add(new DataCarrier("Bob's mobile phone"));
-
 	vDataCarriers.add(new DataCarrier("Dave's digital camera card"));
-
-	// Data Carriers are set up.
-	////////////////////////////////////////////////////////////
     }
 }
