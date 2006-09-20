@@ -37,4 +37,15 @@ public class Location
 	this.strName = strName;
 	this.fProbability = fProbability;
     }
+
+    /**
+     * Used by java.util.Vector.indexOf()
+     */
+    public boolean equals(Object obj)
+    {
+	if(this == obj){ return true; }
+        if(!(obj instanceof Location)) { return false; }
+	if(((Location)obj).strName == strName){ return true; }
+	return false;
+    }
 }

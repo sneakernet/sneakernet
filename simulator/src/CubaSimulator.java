@@ -24,6 +24,7 @@ class CubaSimulator
     public static void main(String[] args)
     {
         System.out.println("Cuba Simulator");
+	System.out.println();
 
 	// Create a new simulation.
 	CubaSimulator simulation = new CubaSimulator();
@@ -33,23 +34,92 @@ class CubaSimulator
     }
 
     /**
-     * Constructs this simulation.
+     * Sets up this simulation, with information specific to this
+     * simulation scenario.
      */
     public CubaSimulator()
     {
-	// This simulation uses hours as a unit of time.
+	/**
+	 * This simulation uses hours as a unit of time.
+	 */
 	super("hour", "hours");
 
+	////////////////////////////////////////////////////////////
 	// Set up the Locations in this simulation.
-	vLocations.add(new Location("Miami International Airport", 0.1));
+
 	// The two parameters for a location are the location's name,
 	// and the chance that two data carriers in that location have
 	// of gossiping per time unit.
-	vLocations.add(new Location("Havana Airport", 0.1));
 
+	// Miami International Airport, 30% chance of two data
+	// carriers gossiping.  If two carriers in the airport then
+	// they will probably take around three hours to find each
+	// other.
+	Location locationMIA =
+	    new Location("Miami International Airport", 0.3);
+	vLocations.add(locationMIA);
+
+	// Eighth Street in Miami.
+	Location locationCalleOcho =
+	    new Location("Calle Ocho, Miami", 0.25);
+
+	// Havana Airport.
+	Location locationHAV =
+	    new Location("Havana Airport", 0.25);
+	vLocations.add(locationHAV);
+
+	// An avenue that runs along the sea wall in Havana where
+	// people can meet and interact.  Gossip shouldn't take more
+	// than two hours.
+	Location locationMalecon =
+	    new Location("the Malecon", 0.5);
+
+	////////////////////////////////////////////////////////////
+	// Set up the routes that the Data Carriers will follow.
+
+	Location[] aLocationsMaleconToHAV = {locationMalecon, locationHAV};
+	Route routeMaleconToHAVcirculation =
+	    new Route(aLocationsMaleconToHAV);
+
+	Location[] aLocationsMIAtoHAV = {locationMIA, locationHAV};
+	Route routeMIAtoHAVcirculation =
+	    new Route(aLocationsMIAtoHAV);
+
+	Location[] aLocationsCalleOchoToMIA = {locationCalleOcho, locationMIA};
+	Route routeCalleOchoToMIAcirculation =
+	    new Route(aLocationsCalleOchoToMIA);
+
+	////////////////////////////////////////////////////////////
 	// Set up the Data Carriers in this simulation.
-	vDataCarriers.add(new DataCarrier("Alex's PDA"));
-	vDataCarriers.add(new DataCarrier("Bob's mobile phone"));
-	vDataCarriers.add(new DataCarrier("Dave's digital camera card"));
+
+	// Alex is an email user in Cuba.
+	vDataCarriers.add(new DataCarrier("Alex's PDA",
+					  locationMalecon,
+					  // Does not travel.
+					  null,
+					  // 10% chance of generating
+					  // an email per hour.
+					  0.1));
+
+	// Bob is a courier who visits the Havana airport frequently.
+	vDataCarriers.add(new DataCarrier("Bob's mobile phone",
+					  locationMalecon,
+					  routeMaleconToHAVcirculation,
+					  // Does not generate datagrams
+					  // of his own.
+					  0));
+
+	// Chuck is a traveler who travels between the Miami and the
+	// Havana airports sometimes.
+	vDataCarriers.add(new DataCarrier("Chuck's digital camera card",
+					  locationMIA,
+					  routeMIAtoHAVcirculation,
+					  0));
+
+	// Eddie is a free person in Miami who has an Internet connection.
+	vDataCarriers.add(new DataCarrier("Eddie's laptop computer",
+					  locationCalleOcho,
+					  routeCalleOchoToMIAcirculation,
+					  0));
     }
 }

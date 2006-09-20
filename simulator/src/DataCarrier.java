@@ -14,13 +14,42 @@ package org.iwb.simulator;
  */
 public class DataCarrier
 {
+    /**
+     * The name of this data carrier, for the log.
+     */
     String strName;
+    
+    /**
+     * The starting location of this data carrier.
+     */
+    Location locationLast;
+
+    /**
+     * The chance that this data carrier will generate an email message
+     * per time unit.
+     */
+    double dChanceOfComposingNewDatagramPerTimeUnit;
+
+    /**
+     * The route that the data carrier follows during the simulation.
+     */
+    Route routeToFollow;
 
     /**
      * Initializes a Data Carrier.  Called from a specific Simulator subclass.
      */
-    public DataCarrier(String strName)
+    public DataCarrier(String strName,
+		       Location locationStart,
+		       Route routeToFollow,
+		       double dChanceOfComposingNewDatagramPerTimeUnit)
     {
 	this.strName = strName;
+	this.locationLast = locationStart;
+	this.routeToFollow = routeToFollow;
+	this.dChanceOfComposingNewDatagramPerTimeUnit =
+	    dChanceOfComposingNewDatagramPerTimeUnit;
+
+	System.out.println(strName + " is starting at location: " +
+			   locationStart.strName);
     }
 }

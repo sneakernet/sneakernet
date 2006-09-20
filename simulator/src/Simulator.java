@@ -31,6 +31,12 @@ public class Simulator
     String strTimeUnits;
 
     /**
+     * How many iterations of the time unit to run for this simulation.
+     * The defaults value is 10 iterations.
+     */
+    int iIterations = 10;
+
+    /**
      * The Locations covered in this simulator, where Data Carriers reside
      * and potentially gossip with one another.
      */
@@ -43,7 +49,7 @@ public class Simulator
     Vector vDataCarriers;
 
     /**
-     * Set up some default stuff.
+     * Create a new simulator.
      */
     public Simulator(String strTimeUnit, String strTimeUnits)
     {
@@ -80,6 +86,38 @@ public class Simulator
 	    DataCarrier dataCarrier =
 		(DataCarrier) vDataCarriers.elementAt(index);
 	    System.out.println("    " + dataCarrier.strName);
+	}
+
+	// Loop through the specified number of time slice iterations.
+	int iIterationIndex = 0;
+	for(;iIterationIndex<iIterations; iIterationIndex++)
+	{
+	    System.out.println();
+	    System.out.println(strTimeUnit + " #" +
+			       (iIterationIndex + 1) + ":");
+
+	    // For each data carrier in the simulation, find out
+	    // whether it has moved along a route to a new location or
+	    // not.
+	    int iDataCarrierIndex = 0;
+	    for(;iDataCarrierIndex < vDataCarriers.size();
+		iDataCarrierIndex++)
+	    {
+		DataCarrier cDataCarrier = (DataCarrier)
+		    vDataCarriers.elementAt(iDataCarrierIndex);
+
+		Location locationLast =
+		    cDataCarrier.locationLast;
+		if(cDataCarrier.routeToFollow != null)
+		{
+		    cDataCarrier.locationLast =
+			cDataCarrier.routeToFollow.currentLocation(locationLast);
+		}
+
+		System.out.println(cDataCarrier.strName +
+				   " is at location: " +
+				   cDataCarrier.locationLast.strName);
+	    }
 	}
     }
 }
