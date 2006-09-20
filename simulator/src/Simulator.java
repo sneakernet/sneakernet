@@ -19,6 +19,16 @@ import java.util.*;
 public class Simulator
 {
     /**
+     * The name of this simulation scenario.
+     */
+    String strName;
+
+    /**
+     * A background description for this simulation scenario.
+     */
+    String strDescription;
+
+    /**
      * Definition of a unit in time, for the logs.  Singular.
      */
     String strTimeUnit;
@@ -51,8 +61,11 @@ public class Simulator
     /**
      * Create a new simulator.
      */
-    public Simulator(String strTimeUnit, String strTimeUnits)
+    public Simulator(String strName, String strDescription,
+		     String strTimeUnit, String strTimeUnits)
     {
+	this.strName = strName;
+	this.strDescription = strDescription;
 	this.strTimeUnit = strTimeUnit;
 	this.strTimeUnits = strTimeUnits;
 
@@ -65,27 +78,35 @@ public class Simulator
      */
     public void simulate()
     {
-	// Log the unit of time for this simulation.
+        System.out.println(strName);
 	System.out.println();
+
+        System.out.println(strDescription);
+	System.out.println();
+
+	// Log the unit of time for this simulation.
 	System.out.println("Time unit: " + strTimeUnits);
+	System.out.println();
 
 	// Print a list of locations to the log.
-	System.out.println();
 	System.out.println("Locations:");
 	for(int index=0;index < vLocations.size();index++)
 	{
 	    Location location = (Location) vLocations.elementAt(index);
 	    System.out.println("    " + location.strName);
 	}
+	System.out.println();
 
 	// Print a list of locations to the log.
-	System.out.println();
 	System.out.println("Data Carriers:");
 	for(int index=0;index < vDataCarriers.size();index++)
 	{
 	    DataCarrier dataCarrier =
 		(DataCarrier) vDataCarriers.elementAt(index);
-	    System.out.println("    " + dataCarrier.strName);
+	    System.out.println("    " + dataCarrier.strName +
+			       ", " + dataCarrier.strDescription + ", ");
+	    System.out.println("        is starting at " +
+			       dataCarrier.locationLast.strName + ".");
 	}
 
 	// Loop through the specified number of time slice iterations.

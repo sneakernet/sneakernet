@@ -18,6 +18,11 @@ public class DataCarrier
      * The name of this data carrier, for the log.
      */
     String strName;
+
+    /**
+     * A description of this data carrier for the log.
+     */
+    String strDescription;
     
     /**
      * The starting location of this data carrier.
@@ -39,17 +44,16 @@ public class DataCarrier
      * Initializes a Data Carrier.  Called from a specific Simulator subclass.
      */
     public DataCarrier(String strName,
+		       String strDescription,
 		       Location locationStart,
 		       Route routeToFollow,
 		       double dChanceOfComposingNewDatagramPerTimeUnit)
     {
 	this.strName = strName;
+	this.strDescription = strDescription;
 	this.locationLast = locationStart;
 	this.routeToFollow = routeToFollow;
 	this.dChanceOfComposingNewDatagramPerTimeUnit =
 	    dChanceOfComposingNewDatagramPerTimeUnit;
-
-	System.out.println(strName + " is starting at location: " +
-			   locationStart.strName);
     }
 }

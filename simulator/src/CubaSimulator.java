@@ -23,9 +23,6 @@ class CubaSimulator
      */
     public static void main(String[] args)
     {
-        System.out.println("Cuba Simulator");
-	System.out.println();
-
 	// Create a new simulation.
 	CubaSimulator simulation = new CubaSimulator();
 
@@ -42,7 +39,12 @@ class CubaSimulator
 	/**
 	 * This simulation uses hours as a unit of time.
 	 */
-	super("hour", "hours");
+	super("Sneakernet to Cuba Simulation",
+	      "This scenario simulates a simple chain of couriers " +
+	      "connecting Alex, an email user in Cuba, to Eddie, " +
+	      "a free person in Miami with an Internet connection " +
+	      "who provides Internet access by proxy for Alex.",
+	      "hour", "hours");
 
 	////////////////////////////////////////////////////////////
 	// Set up the Locations in this simulation.
@@ -62,6 +64,7 @@ class CubaSimulator
 	// Eighth Street in Miami.
 	Location locationCalleOcho =
 	    new Location("Calle Ocho, Miami", 0.25);
+	vLocations.add(locationCalleOcho);
 
 	// Havana Airport.
 	Location locationHAV =
@@ -73,6 +76,7 @@ class CubaSimulator
 	// than two hours.
 	Location locationMalecon =
 	    new Location("the Malecon", 0.5);
+	vLocations.add(locationMalecon);
 
 	////////////////////////////////////////////////////////////
 	// Set up the routes that the Data Carriers will follow.
@@ -94,6 +98,7 @@ class CubaSimulator
 
 	// Alex is an email user in Cuba.
 	vDataCarriers.add(new DataCarrier("Alex's PDA",
+					  "an email user in Cuba",
 					  locationMalecon,
 					  // Does not travel.
 					  null,
@@ -103,6 +108,7 @@ class CubaSimulator
 
 	// Bob is a courier who visits the Havana airport frequently.
 	vDataCarriers.add(new DataCarrier("Bob's mobile phone",
+					  "a courier who visits the airport",
 					  locationMalecon,
 					  routeMaleconToHAVcirculation,
 					  // Does not generate datagrams
@@ -112,12 +118,14 @@ class CubaSimulator
 	// Chuck is a traveler who travels between the Miami and the
 	// Havana airports sometimes.
 	vDataCarriers.add(new DataCarrier("Chuck's digital camera card",
+					  "a traveler who visits Miami",
 					  locationMIA,
 					  routeMIAtoHAVcirculation,
 					  0));
 
 	// Eddie is a free person in Miami who has an Internet connection.
 	vDataCarriers.add(new DataCarrier("Eddie's laptop computer",
+					  "an access point with an Internet connection",
 					  locationCalleOcho,
 					  routeCalleOchoToMIAcirculation,
 					  0));
