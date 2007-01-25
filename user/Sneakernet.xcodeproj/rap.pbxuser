@@ -1,0 +1,168 @@
+// !$*UTF8*$!
+{
+	2D6B88D70B694735005CA697 /* Source Control */ = {
+		isa = PBXSourceControlManager;
+		fallbackIsa = XCSourceControlManager;
+		isSCMEnabled = 1;
+		scmConfiguration = {
+			SubversionToolPath = /usr/local/bin/svn;
+		};
+		scmType = scm.subversion;
+	};
+	2D6B88D80B694735005CA697 /* Code sense */ = {
+		isa = PBXCodeSenseManager;
+		indexTemplatePath = "";
+	};
+	2D6B88E20B6948CA005CA697 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 888251B805DAF9E10060550A /* Manifest */;
+		name = "Manifest: 6";
+		rLen = 0;
+		rLoc = 242;
+		rType = 0;
+		vrLen = 312;
+		vrLoc = 0;
+	};
+	2D6B88E30B6948CA005CA697 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 2D6B88E40B6948CA005CA697 /* Sneakernet.java */;
+		name = "(null): 1";
+		rLen = 0;
+		rLoc = 0;
+		rType = 0;
+		vrLen = 784;
+		vrLoc = 0;
+	};
+	2D6B88E40B6948CA005CA697 /* Sneakernet.java */ = {
+		isa = PBXFileReference;
+		lastKnownFileType = sourcecode.java;
+		name = Sneakernet.java;
+		path = /Users/rap/projects/sneakernet/user/src/Sneakernet.java;
+		sourceTree = "<absolute>";
+	};
+	2D6B88E50B6948CA005CA697 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 2D6B88E60B6948CA005CA697 /* Sneakernet.java */;
+		name = "(null): 1";
+		rLen = 0;
+		rLoc = 0;
+		rType = 0;
+		vrLen = 784;
+		vrLoc = 0;
+	};
+	2D6B88E60B6948CA005CA697 /* Sneakernet.java */ = {
+		isa = PBXFileReference;
+		name = Sneakernet.java;
+		path = /Users/rap/projects/sneakernet/user/src/Sneakernet.java;
+		sourceTree = "<absolute>";
+	};
+	2D6B88E70B6948CA005CA697 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 888251B805DAF9E10060550A /* Manifest */;
+		name = "Manifest: 6";
+		rLen = 0;
+		rLoc = 242;
+		rType = 0;
+		vrLen = 312;
+		vrLoc = 0;
+	};
+	2D6B88E80B6948CA005CA697 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 2D6B88E90B6948CA005CA697 /* Sneakernet.java */;
+		name = "(null): 28";
+		rLen = 0;
+		rLoc = 994;
+		rType = 0;
+		vrLen = 685;
+		vrLoc = 811;
+	};
+	2D6B88E90B6948CA005CA697 /* Sneakernet.java */ = {
+		isa = PBXFileReference;
+		name = Sneakernet.java;
+		path = /Users/rap/projects/sneakernet/user/src/Sneakernet.java;
+		sourceTree = "<absolute>";
+	};
+	88230FFE05D9926E00FE8D22 /* Project object */ = {
+		activeBuildConfigurationName = Development;
+		activeExecutable = 88934D45061E10E600F42905 /* Sneakernet */;
+		activeTarget = 8823100505D9929B00FE8D22 /* Sneakernet */;
+		codeSenseManager = 2D6B88D80B694735005CA697 /* Code sense */;
+		executables = (
+			88934D45061E10E600F42905 /* Sneakernet */,
+		);
+		perUserDictionary = {
+			PBXConfiguration.PBXFileTableDataSource3.PBXFileTableDataSource = {
+				PBXFileTableDataSourceColumnSortingDirectionKey = "-1";
+				PBXFileTableDataSourceColumnSortingKey = PBXFileDataSource_Filename_ColumnID;
+				PBXFileTableDataSourceColumnWidthsKey = (
+					20,
+					532,
+					20,
+					48.1626,
+					43,
+					43,
+					20,
+				);
+				PBXFileTableDataSourceColumnsKey = (
+					PBXFileDataSource_FiletypeID,
+					PBXFileDataSource_Filename_ColumnID,
+					PBXFileDataSource_Built_ColumnID,
+					PBXFileDataSource_ObjectSize_ColumnID,
+					PBXFileDataSource_Errors_ColumnID,
+					PBXFileDataSource_Warnings_ColumnID,
+					PBXFileDataSource_Target_ColumnID,
+				);
+			};
+			PBXPerProjectTemplateStateSaveDate = 191448872;
+			PBXWorkspaceStateSaveDate = 191448872;
+		};
+		perUserProjectItems = {
+			2D6B88E20B6948CA005CA697 /* PBXTextBookmark */ = 2D6B88E20B6948CA005CA697 /* PBXTextBookmark */;
+			2D6B88E30B6948CA005CA697 /* PBXTextBookmark */ = 2D6B88E30B6948CA005CA697 /* PBXTextBookmark */;
+			2D6B88E50B6948CA005CA697 /* PBXTextBookmark */ = 2D6B88E50B6948CA005CA697 /* PBXTextBookmark */;
+			2D6B88E70B6948CA005CA697 /* PBXTextBookmark */ = 2D6B88E70B6948CA005CA697 /* PBXTextBookmark */;
+			2D6B88E80B6948CA005CA697 /* PBXTextBookmark */ = 2D6B88E80B6948CA005CA697 /* PBXTextBookmark */;
+		};
+		sourceControlManager = 2D6B88D70B694735005CA697 /* Source Control */;
+		userBuildSettings = {
+		};
+	};
+	8823100505D9929B00FE8D22 /* Sneakernet */ = {
+		activeExec = 0;
+	};
+	88934D45061E10E600F42905 /* Sneakernet */ = {
+		isa = PBXExecutable;
+		activeArgIndex = 0;
+		activeArgIndices = (
+			YES,
+		);
+		argumentStrings = (
+			"-jar \"/Developer/Java/mpp-sdk/player.jar\" \"dist/Sneakernet.jar\"",
+		);
+		autoAttachOnCrash = 1;
+		configStateDict = {
+		};
+		customDataFormattersEnabled = 1;
+		debuggerPlugin = JavaDebugging;
+		disassemblyDisplayState = 0;
+		dylibVariantSuffix = "";
+		enableDebugStr = 1;
+		environmentEntries = (
+		);
+		executableSystemSymbolLevel = 0;
+		executableUserSymbolLevel = 0;
+		launchableReference = 88934D46061E10E600F42905 /* java */;
+		libgmallocEnabled = 0;
+		name = Sneakernet;
+		sourceDirectories = (
+		);
+		startupPath = "<<ProjectDirectory>>";
+	};
+	88934D46061E10E600F42905 /* java */ = {
+		isa = PBXFileReference;
+		explicitFileType = "compiled.mach-o.executable";
+		name = java;
+		path = /usr/bin/java;
+		sourceTree = "<absolute>";
+	};
+}

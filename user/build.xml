@@ -1,4 +1,72 @@
-<?xml version="1.0" encoding="ISO-8859-1"?>
-<project name="user" default="dist">
-    <import file="../build-common.xml"/>
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="Sneakernet" default="jar" basedir=".">
+    <property name="src" location="src"/>
+    <property name="bin" location="bin"/>
+	<property name="classes" location="classes"/>
+	<property name="preverified" location="preverified" />
+    <property name="lib" location="lib"/>
+    <property name="dist" location="dist"/>
+    <property name="jarfile" location="${dist}/${ant.project.name}.jar"/>
+	<property name="jadfile" location="${dist}/${ant.project.name}.jad"/>
+    <property name="compile.debug" value="true"/>
+	<property name="resources" location="res"/>
+	
+  <!-- Edit the "mpp" property with the path to your installed mpp-sdk. -->
+  <property name="mpp" value="/Developer/Java/mpp-sdk"/>
+  <property name="mppdev" value="${mpp}"/>
+
+
+  <!-- The "preverify" target requires the bootstrap classes. (This is where they live on Mac OS X.) -->
+  <!-- property name="java.classes.jar" value="/System/Library/Frameworks/JavaVM.framework/Classes/classes.jar" -->
+  <property name="java.classes.jar" value="/System/Library/Frameworks/JavaVM.framework/Versions/1.4.2/Classes/classes.jar" />
+
+    <fileset id="lib.jars" dir="${lib}">
+        <include name="**/*.jar"/>
+    </fileset>
+
+    <path id="lib.path">
+        <fileset refid="lib.jars"/>
+    </path>
+
+    <target name="compile" description="Compile code">
+        <mkdir dir="${lib}"/>
+		<mkdir dir="${classes}"/>
+        <javac srcdir="${src}" destdir="${classes}" includeAntRuntime="no"
+               classpathref="lib.path" classpath="${mppdev}/cldc.jar:${mppdev}/midp.jar" debug="${compile.debug}">
+        </javac>
+    </target>
+	
+	  <!-- The preverify target is set up for Mac OS X -->
+	  <target name="preverify" depends="compile">
+		<mkdir dir="${preverified}"/>
+		<exec executable="${mppdev}/osx/preverify/preverify">
+		  <arg line="-classpath ${java.classes.jar}:${mppdev}/cldc.jar:${mppdev}/midp.jar"/>	
+		  <arg line="-d '${preverified}'"/>
+		  <arg line="classes"/>
+		</exec>
+	  </target>
+	
+
+    <target name="jar" depends="preverify" description="Build jar">
+        <mkdir dir="${dist}"/>
+        <jar jarfile="${jarfile}" basedir="${preverified}" manifest="Manifest">
+            <!-- Merge library jars into final jar file -->
+            <zipgroupfileset refid="lib.jars"/>
+            <fileset dir="${resources}"/>
+        </jar>
+		<copy file="${ant.project.name}.jad" tofile="${jadfile}" />
+    </target>
+
+    <target name="run" depends="jar" description="Run jar file">
+        <java jar="${mppdev}/player.jar" fork="yes" failonerror="true">
+		 <arg value="${dist}/${project}.jad"/>
+		</java>
+    </target>
+
+    <target name="clean" description="Remove build and dist directories">
+        <delete dir="${bin}"/>
+        <delete dir="${dist}"/>
+		<delete dir="${classes}" />
+		<delete dir="${preverified}" />
+    </target>
 </project>
