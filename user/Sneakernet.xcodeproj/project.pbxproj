@@ -11,7 +11,7 @@
 		886FEE5705D9BD280091015F /* lib */ = {isa = PBXFileReference; lastKnownFileType = folder; path = lib; sourceTree = "<group>"; };
 		886FEE5905D9BD280091015F /* src */ = {isa = PBXFileReference; lastKnownFileType = folder; path = src; sourceTree = "<group>"; };
 		888251B805DAF9E10060550A /* Manifest */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = text; path = Manifest; sourceTree = "<group>"; };
-		88934D71061E157F00F42905 /* dist */ = {isa = PBXFileReference; lastKnownFileType = file; path = dist; sourceTree = "<group>"; };
+		88934D71061E157F00F42905 /* dist */ = {isa = PBXFileReference; lastKnownFileType = folder; path = dist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXGroup section */
