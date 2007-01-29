@@ -10,7 +10,7 @@ import javax.microedition.midlet.*;
  * Copyright (c) 2007 <a href="http://informationwithoutborders.endymion.com">Information Without Borders</a><br>
  * Licensed under the <a href="http://www.gnu.org/copyleft/gpl.html">GNU General Public License</a>.
  *
- * @see <a href="http://informationwithoutborders.endymion.com/index.php?title=Simulator_Code">Simulator Code</a>
+ * @see <a href="http://informationwithoutborders.endymion.com/index.php?title=User_Code">User Code</a>
  *
  * @author $Author: information.without.borders $ at <a href="http://informationwithoutborders.endymion.com">Information Without Borders</a>
  * @version $Revision: 14 $
@@ -22,14 +22,20 @@ public class Sneakernet extends MIDlet implements CommandListener
 	private Command okayCmd;
 
 	private Form mLoginScreen;
-	private StringItem stringItem;
-	private TextField txtField;
+	private TextField mLoginEmail;
+	private TextField mLoginPassword;
 		
 	private Form mSubscribeToEmailScreen;
 	private StringItem mSubscribeString;
 	private TextField mSubscribeServer;
 	private TextField mSubscribeUserName;
 	private TextField mSubscribePassword;
+
+	private List mYourInformationScreen;
+
+	private List mYourEmailScreen;
+
+	private List mWebFeedScreen;
 
 	public Sneakernet()
 	{
@@ -39,33 +45,40 @@ public class Sneakernet extends MIDlet implements CommandListener
     {	
 		if( mLoginScreen == null )
 		{
-			mLoginScreen = new Form( "Information Without Borders" );
+			// Header
+			
+			mLoginScreen = new Form( "Sneakernet Login" );
 
-			stringItem = new StringItem("Sneakernet Login", null);
-			mLoginScreen.append(stringItem);
+			// Form
 
-			txtField = new TextField(
+			mLoginEmail = new TextField(
 			"Your Email Address: ", "", 50, TextField.ANY);
-			mLoginScreen.append(txtField);
+			mLoginScreen.append(mLoginEmail);
 
-			txtField = new TextField(
+			mLoginPassword = new TextField(
 			"Your Password: ", "", 50, TextField.PASSWORD);
-			mLoginScreen.append(txtField);
+			mLoginScreen.append(mLoginPassword);
+
+			// Comands
 
 			exitCmd = new Command( "Exit", Command.EXIT, 0 );
 			mLoginScreen.addCommand( exitCmd );
-			mLoginScreen.setCommandListener( this );
 
 			okayCmd = new Command( "Okay", Command.OK, 0 );
 			mLoginScreen.addCommand( okayCmd );
+
 			mLoginScreen.setCommandListener( this );
 		}
 
 		if( mSubscribeToEmailScreen == null )
 		{
-			mSubscribeToEmailScreen = new Form( "Information Without Borders" );
+			// Header
+			
+			mSubscribeToEmailScreen = new Form( "Subscribe to Email" );
+			
+			// Form
 
-			mSubscribeString = new StringItem("Subscribe To Email", null);
+			mSubscribeString = new StringItem("Enter email account information: ", null);
 			mSubscribeToEmailScreen.append(mSubscribeString);
 
 			mSubscribeServer = new TextField(
@@ -79,14 +92,87 @@ public class Sneakernet extends MIDlet implements CommandListener
 			mSubscribePassword = new TextField(
 			"Password: ", "", 50, TextField.PASSWORD);
 			mSubscribeToEmailScreen.append(mSubscribePassword);
+			
+			// Commands
 
 			exitCmd = new Command( "Exit", Command.EXIT, 0 );
 			mSubscribeToEmailScreen.addCommand( exitCmd );
-			mSubscribeToEmailScreen.setCommandListener( this );
 
 			okayCmd = new Command( "Okay", Command.OK, 0 );
 			mSubscribeToEmailScreen.addCommand( okayCmd );
+			
 			mSubscribeToEmailScreen.setCommandListener( this );
+		}
+		
+		if( mYourInformationScreen == null )
+		{
+			// Header & form
+			
+			mYourInformationScreen = new List( "Your Information",
+												Choice.IMPLICIT);
+
+			mYourInformationScreen.append("Your Email", null);
+			mYourInformationScreen.append("Web Feed Subscription", null);
+			mYourInformationScreen.append("Another Web Feed Subscription", null);
+			mYourInformationScreen.append("Yet Another Web Feed", null);
+
+			// Commands
+
+			exitCmd = new Command( "Exit", Command.EXIT, 0 );
+			mYourInformationScreen.addCommand( exitCmd );
+
+			okayCmd = new Command( "Okay", Command.OK, 0 );
+			mYourInformationScreen.addCommand( okayCmd );
+
+			mYourInformationScreen.setCommandListener( this );
+		}
+
+		if( mYourEmailScreen == null )
+		{
+			// Header & form
+			
+			mYourEmailScreen = new List( "Your Email",
+												Choice.IMPLICIT);
+
+			mYourEmailScreen.append("* Are you okay? >Mom", null);
+			mYourEmailScreen.append("* We can email now!! >Sister", null);
+			mYourEmailScreen.append("Human Rights Vio- >Amnesty Int-", null);
+			mYourEmailScreen.append("Order #3057 >Amazon.com", null);
+
+			// Commands
+
+			exitCmd = new Command( "Exit", Command.EXIT, 0 );
+			mYourEmailScreen.addCommand( exitCmd );
+
+			okayCmd = new Command( "Okay", Command.OK, 0 );
+			mYourEmailScreen.addCommand( okayCmd );
+
+			mYourEmailScreen.setCommandListener( this );
+		}
+
+		if( mWebFeedScreen == null )
+		{
+			// Header & form
+			
+			mWebFeedScreen = new List( "Web Feed Subscription",
+												Choice.IMPLICIT);
+
+			mWebFeedScreen.append("* Net use in Cuba incr- >1/25/2009", null);
+			mWebFeedScreen.append("* African email project >1/24/2009", null);
+			mWebFeedScreen.append("* News from North Kor- >1/23/2009", null);
+			mWebFeedScreen.append("Status report from tes- >1/22/2009", null);
+			mWebFeedScreen.append("Handset donation inf- >12/28/2008", null);
+			mWebFeedScreen.append("Software update for - >12/24/2008", null);
+
+			// Commands
+
+			exitCmd = new Command( "Exit", Command.EXIT, 0 );
+			mWebFeedScreen.addCommand( exitCmd );
+
+			okayCmd = new Command( "Okay", Command.OK, 0 );
+			mWebFeedScreen.addCommand( okayCmd );
+
+			mWebFeedScreen.setCommandListener( this );
 		}
 
 		mDisplay = Display.getDisplay( this );
@@ -118,6 +204,21 @@ public class Sneakernet extends MIDlet implements CommandListener
 				mDisplay = Display.getDisplay( this );
 				mDisplay.setCurrent( mSubscribeToEmailScreen );				
 			}
+			else if( mScreen == mSubscribeToEmailScreen )
+			{
+				mDisplay = Display.getDisplay( this );
+				mDisplay.setCurrent( mYourInformationScreen );				
+			}			
+			else if( mScreen == mYourInformationScreen )
+			{
+				mDisplay = Display.getDisplay( this );
+				mDisplay.setCurrent( mYourEmailScreen );				
+			}			
+			else if( mScreen == mYourEmailScreen )
+			{
+				mDisplay = Display.getDisplay( this );
+				mDisplay.setCurrent( mWebFeedScreen );				
+			}			
 			else
 			{
 				mDisplay = Display.getDisplay( this );
