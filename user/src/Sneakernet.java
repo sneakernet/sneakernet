@@ -1,6 +1,13 @@
 import javax.microedition.lcdui.*;
 import javax.microedition.midlet.*;
 
+import java.security.Security;
+
+import org.bouncycastle.jce.provider.BouncyCastleProvider;
+//import org.bouncycastle.util.test.Test;
+//import org.bouncycastle.util.test.TestResult;
+//import org.bouncycastle.jce.provider.test.ElGamalTest;
+
 /**
  * This is the J2ME MIDlet from the
  * the <a
@@ -22,6 +29,7 @@ public class Sneakernet extends MIDlet implements CommandListener
 	private Command okayCmd;
 
 	private Form mLoginScreen;
+	private StringItem mCryptoVersionString;
 	private TextField mLoginEmail;
 	private TextField mLoginPassword;
 		
@@ -50,6 +58,20 @@ public class Sneakernet extends MIDlet implements CommandListener
 			mLoginScreen = new Form( "Sneakernet Login" );
 
 			// Form
+			
+			Security.addProvider(new BouncyCastleProvider());
+//			ElGamalTest mElGamalTest = new ElGamalTest();
+//			TestResult result = mElGamalTest.perform();
+//            if (result.getException() != null)
+//            {
+//                result.getException().printStackTrace();
+//            }
+//			mCryptoVersionString = new StringItem(result.toString(), null);
+//			mCryptoVersionString = new StringItem("test", "test");
+			mCryptoVersionString = new StringItem(
+			"Crypto:",
+			Security.getProvider("BC").getInfo());
+			mLoginScreen.append(mCryptoVersionString);
 
 			mLoginEmail = new TextField(
 			"Your Email Address: ", "", 50, TextField.ANY);

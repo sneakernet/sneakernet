@@ -1,26 +1,24 @@
 // !$*UTF8*$!
 {
+	2D4200D80B6FB93E00CCC516 /* SimpleTest.java */ = {
+		isa = PBXFileReference;
+		fileEncoding = 30;
+		lastKnownFileType = sourcecode.java;
+		name = SimpleTest.java;
+		path = /Users/rap/projects/sneakernet/user/src/SimpleTest.java;
+		sourceTree = "<absolute>";
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {802, 1190}}";
+			sepNavSelRange = "{66, 37}";
+			sepNavVisRect = "{{0, 732}, {802, 458}}";
+		};
+	};
 	2D42FE390B6AB39E00CCC516 /* Sneakernet.java */ = {
 		isa = PBXFileReference;
 		lastKnownFileType = sourcecode.java;
 		name = Sneakernet.java;
 		path = /Users/rap/projects/sneakernet/user/src/Sneakernet.java;
 		sourceTree = "<absolute>";
-		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {860, 3220}}";
-			sepNavSelRange = "{4621, 0}";
-			sepNavVisRect = "{{0, 2025}, {828, 668}}";
-		};
-	};
-	2D42FE720B6BB91E00CCC516 /* PBXTextBookmark */ = {
-		isa = PBXTextBookmark;
-		fRef = 886FEE5605D9BD280091015F /* build.xml */;
-		name = "<copy file=\"${ant.project.name}.jad\" tofile=\"${jadfile}\" />";
-		rLen = 62;
-		rLoc = 2349;
-		rType = 0;
-		vrLen = 1645;
-		vrLoc = 1210;
 	};
 	2D42FE730B6BB91E00CCC516 /* PBXTextBookmark */ = {
 		isa = PBXTextBookmark;
@@ -31,62 +29,6 @@
 		rType = 0;
 		vrLen = 312;
 		vrLoc = 0;
-	};
-	2D42FE740B6BB91E00CCC516 /* PBXTextBookmark */ = {
-		isa = PBXTextBookmark;
-		fRef = 2D42FE390B6AB39E00CCC516 /* Sneakernet.java */;
-		name = "Sneakernet.java: 137";
-		rLen = 0;
-		rLoc = 3940;
-		rType = 0;
-		vrLen = 1245;
-		vrLoc = 455;
-	};
-	2D42FE750B6BB91E00CCC516 /* PBXTextBookmark */ = {
-		isa = PBXTextBookmark;
-		fRef = 2D42FE390B6AB39E00CCC516 /* Sneakernet.java */;
-		name = "Sneakernet.java: 137";
-		rLen = 0;
-		rLoc = 3940;
-		rType = 0;
-		vrLen = 1245;
-		vrLoc = 455;
-	};
-	2D42FE760B6BB91E00CCC516 /* PBXTextBookmark */ = {
-		isa = PBXTextBookmark;
-		fRef = 886FEE5605D9BD280091015F /* build.xml */;
-		name = "<copy file=\"${ant.project.name}.jad\" tofile=\"${jadfile}\" />";
-		rLen = 62;
-		rLoc = 2349;
-		rType = 0;
-		vrLen = 1645;
-		vrLoc = 1210;
-	};
-	2D42FE770B6BB91E00CCC516 /* PBXTextBookmark */ = {
-		isa = PBXTextBookmark;
-		fRef = 888251B805DAF9E10060550A /* Manifest */;
-		name = "Manifest: 6";
-		rLen = 0;
-		rLoc = 242;
-		rType = 0;
-		vrLen = 312;
-		vrLoc = 0;
-	};
-	2D42FE920B6E569F00CCC516 /* PBXTextBookmark */ = {
-		isa = PBXTextBookmark;
-		fRef = 2D42FE930B6E569F00CCC516 /* Sneakernet.java */;
-		name = "(null): 162";
-		rLen = 0;
-		rLoc = 4621;
-		rType = 0;
-		vrLen = 1008;
-		vrLoc = 4139;
-	};
-	2D42FE930B6E569F00CCC516 /* Sneakernet.java */ = {
-		isa = PBXFileReference;
-		name = Sneakernet.java;
-		path = /Users/rap/projects/sneakernet/user/src/Sneakernet.java;
-		sourceTree = "<absolute>";
 	};
 	2D6B88D70B694735005CA697 /* Source Control */ = {
 		isa = PBXSourceControlManager;
@@ -117,11 +59,6 @@
 		name = Sneakernet.java;
 		path = /Users/rap/projects/sneakernet/user/src/Sneakernet.java;
 		sourceTree = "<absolute>";
-		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {860, 3220}}";
-			sepNavSelRange = "{4621, 0}";
-			sepNavVisRect = "{{0, 2039}, {828, 445}}";
-		};
 	};
 	2D6B88E70B6948CA005CA697 /* PBXTextBookmark */ = {
 		isa = PBXTextBookmark;
@@ -143,16 +80,194 @@
 		isa = PBXTextBookmark;
 		fRef = 886FEE5605D9BD280091015F /* build.xml */;
 		name = "<copy file=\"${ant.project.name}.jad\" tofile=\"${jadfile}\" />";
-		rLen = 62;
-		rLoc = 2349;
+		rLen = 0;
+		rLoc = 3960;
 		rType = 0;
 		vrLen = 1252;
 		vrLoc = 1603;
+	};
+	2DD4BC230B70EF3900F0CF49 /* build.xml */ = {
+		isa = PBXFileReference;
+		lastKnownFileType = text.xml;
+		name = build.xml;
+		path = /Users/rap/Documents/Security3/build/build.xml;
+		sourceTree = "<absolute>";
+	};
+	2DD4BC270B70EF3900F0CF49 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 2DD4BC280B70EF3900F0CF49 /* build.xml */;
+		name = "(null): 11";
+		rLen = 165;
+		rLoc = 366;
+		rType = 0;
+		vrLen = 1215;
+		vrLoc = 0;
+	};
+	2DD4BC280B70EF3900F0CF49 /* build.xml */ = {
+		isa = PBXFileReference;
+		lastKnownFileType = text.xml;
+		name = build.xml;
+		path = /Users/rap/Documents/Security3/build/build.xml;
+		sourceTree = "<absolute>";
+	};
+	2DDB7BC90B723BD000FE1F47 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 2DD4BC230B70EF3900F0CF49 /* build.xml */;
+		name = "build.xml: 41";
+		rLen = 504;
+		rLoc = 1391;
+		rType = 0;
+		vrLen = 1118;
+		vrLoc = 1280;
+	};
+	2DDB7C1B0B724D7100FE1F47 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 886FEE5605D9BD280091015F /* build.xml */;
+		name = "build.xml: 61";
+		rLen = 0;
+		rLoc = 2603;
+		rType = 0;
+		vrLen = 1212;
+		vrLoc = 1569;
+	};
+	2DDB7CF00B72900700FE1F47 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 2D4200D80B6FB93E00CCC516 /* SimpleTest.java */;
+		name = "import org.bouncycastle.util.Arrays;";
+		rLen = 37;
+		rLoc = 66;
+		rType = 0;
+		vrLen = 712;
+		vrLoc = 1115;
+	};
+	2DDB7CF10B72900700FE1F47 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 2D42FE390B6AB39E00CCC516 /* Sneakernet.java */;
+		name = "Sneakernet.java: 33";
+		rLen = 0;
+		rLoc = 1204;
+		rType = 0;
+		vrLen = 1224;
+		vrLoc = 0;
+	};
+	2DDB7CF40B72900700FE1F47 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 2D42FE390B6AB39E00CCC516 /* Sneakernet.java */;
+		name = "TestResult = mElGamalTest.perform();";
+		rLen = 47;
+		rLoc = 1845;
+		rType = 0;
+		vrLen = 1224;
+		vrLoc = 0;
+	};
+	2DDB7CF60B72900700FE1F47 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 2D4200D80B6FB93E00CCC516 /* SimpleTest.java */;
+		name = "import org.bouncycastle.util.Arrays;";
+		rLen = 37;
+		rLoc = 66;
+		rType = 0;
+		vrLen = 735;
+		vrLoc = 0;
+	};
+	2DDB7CF70B72900700FE1F47 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 2D42FE390B6AB39E00CCC516 /* Sneakernet.java */;
+		name = "Sneakernet.java: 64";
+		rLen = 0;
+		rLoc = 1866;
+		rType = 0;
+		vrLen = 815;
+		vrLoc = 1526;
+	};
+	2DDB7CF80B72900700FE1F47 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 2D4200D80B6FB93E00CCC516 /* SimpleTest.java */;
+		name = "import org.bouncycastle.util.Arrays;";
+		rLen = 37;
+		rLoc = 66;
+		rType = 0;
+		vrLen = 712;
+		vrLoc = 1115;
+	};
+	2DDB7D150B72923500FE1F47 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 2DDB7D160B72923500FE1F47 /* TestFailedException.java */;
+		name = "(null): 1";
+		rLen = 0;
+		rLoc = 0;
+		rType = 0;
+		vrLen = 313;
+		vrLoc = 0;
+	};
+	2DDB7D160B72923500FE1F47 /* TestFailedException.java */ = {
+		isa = PBXFileReference;
+		lastKnownFileType = file;
+		name = TestFailedException.java;
+		path = /Users/rap/projects/sneakernet/user/src/TestFailedException.java;
+		sourceTree = "<absolute>";
+	};
+	2DDB7D190B72923500FE1F47 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 2D42FE390B6AB39E00CCC516 /* Sneakernet.java */;
+		name = "//";
+		rLen = 2;
+		rLoc = 2265;
+		rType = 0;
+		vrLen = 1009;
+		vrLoc = 1621;
+	};
+	2DDB7D1A0B72923500FE1F47 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 2DDB7D1B0B72923500FE1F47 /* TestFailedException.java */;
+		name = "(null): 1";
+		rLen = 0;
+		rLoc = 0;
+		rType = 0;
+		vrLen = 313;
+		vrLoc = 0;
+	};
+	2DDB7D1B0B72923500FE1F47 /* TestFailedException.java */ = {
+		isa = PBXFileReference;
+		lastKnownFileType = file;
+		name = TestFailedException.java;
+		path = /Users/rap/projects/sneakernet/user/src/TestFailedException.java;
+		sourceTree = "<absolute>";
+	};
+	2DDB7D1C0B72923500FE1F47 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 2D42FE390B6AB39E00CCC516 /* Sneakernet.java */;
+		name = "Sneakernet.java: 71";
+		rLen = 0;
+		rLoc = 2204;
+		rType = 0;
+		vrLen = 1009;
+		vrLoc = 1621;
+	};
+	2DDB7D1E0B72923D00FE1F47 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 2DDB7D1F0B72923D00FE1F47 /* Sneakernet.java */;
+		name = "(null): 71";
+		rLen = 0;
+		rLoc = 2204;
+		rType = 0;
+		vrLen = 1009;
+		vrLoc = 1621;
+	};
+	2DDB7D1F0B72923D00FE1F47 /* Sneakernet.java */ = {
+		isa = PBXFileReference;
+		lastKnownFileType = sourcecode.java;
+		name = Sneakernet.java;
+		path = /Users/rap/projects/sneakernet/user/src/Sneakernet.java;
+		sourceTree = "<absolute>";
 	};
 	88230FFE05D9926E00FE8D22 /* Project object */ = {
 		activeBuildConfigurationName = Development;
 		activeExecutable = 88934D45061E10E600F42905 /* Sneakernet */;
 		activeTarget = 8823100505D9929B00FE8D22 /* Sneakernet */;
+		addToTargets = (
+			8823100505D9929B00FE8D22 /* Sneakernet */,
+		);
 		breakpoints = (
 		);
 		breakpointsGroup = 2D6B89070B6949B8005CA697 /* XCBreakpointsBucket */;
@@ -161,12 +276,26 @@
 			88934D45061E10E600F42905 /* Sneakernet */,
 		);
 		perUserDictionary = {
+			PBXConfiguration.PBXFileTableDataSource3.PBXExecutablesDataSource = {
+				PBXFileTableDataSourceColumnSortingDirectionKey = "-1";
+				PBXFileTableDataSourceColumnSortingKey = PBXExecutablesDataSource_NameID;
+				PBXFileTableDataSourceColumnWidthsKey = (
+					22,
+					300,
+					400,
+				);
+				PBXFileTableDataSourceColumnsKey = (
+					PBXExecutablesDataSource_ActiveFlagID,
+					PBXExecutablesDataSource_NameID,
+					PBXExecutablesDataSource_CommentsID,
+				);
+			};
 			PBXConfiguration.PBXFileTableDataSource3.PBXFileTableDataSource = {
 				PBXFileTableDataSourceColumnSortingDirectionKey = "-1";
 				PBXFileTableDataSourceColumnSortingKey = PBXFileDataSource_Filename_ColumnID;
 				PBXFileTableDataSourceColumnWidthsKey = (
 					20,
-					636,
+					610,
 					20,
 					48,
 					43,
@@ -183,20 +312,50 @@
 					PBXFileDataSource_Target_ColumnID,
 				);
 			};
-			PBXPerProjectTemplateStateSaveDate = 191472590;
-			PBXWorkspaceStateSaveDate = 191472590;
+			PBXConfiguration.PBXTargetDataSource.PBXTargetDataSource = {
+				PBXFileTableDataSourceColumnSortingDirectionKey = "-1";
+				PBXFileTableDataSourceColumnSortingKey = PBXFileDataSource_Filename_ColumnID;
+				PBXFileTableDataSourceColumnWidthsKey = (
+					20,
+					200,
+					456,
+					20,
+					48.1626,
+					43,
+					43,
+				);
+				PBXFileTableDataSourceColumnsKey = (
+					PBXFileDataSource_FiletypeID,
+					PBXFileDataSource_Filename_ColumnID,
+					PBXTargetDataSource_PrimaryAttribute,
+					PBXFileDataSource_Built_ColumnID,
+					PBXFileDataSource_ObjectSize_ColumnID,
+					PBXFileDataSource_Errors_ColumnID,
+					PBXFileDataSource_Warnings_ColumnID,
+				);
+			};
+			PBXPerProjectTemplateStateSaveDate = 192057920;
+			PBXWorkspaceStateSaveDate = 192057920;
 		};
 		perUserProjectItems = {
-			2D42FE720B6BB91E00CCC516 /* PBXTextBookmark */ = 2D42FE720B6BB91E00CCC516 /* PBXTextBookmark */;
-			2D42FE730B6BB91E00CCC516 /* PBXTextBookmark */ = 2D42FE730B6BB91E00CCC516 /* PBXTextBookmark */;
-			2D42FE740B6BB91E00CCC516 /* PBXTextBookmark */ = 2D42FE740B6BB91E00CCC516 /* PBXTextBookmark */;
-			2D42FE750B6BB91E00CCC516 /* PBXTextBookmark */ = 2D42FE750B6BB91E00CCC516 /* PBXTextBookmark */;
-			2D42FE760B6BB91E00CCC516 /* PBXTextBookmark */ = 2D42FE760B6BB91E00CCC516 /* PBXTextBookmark */;
-			2D42FE770B6BB91E00CCC516 /* PBXTextBookmark */ = 2D42FE770B6BB91E00CCC516 /* PBXTextBookmark */;
-			2D42FE920B6E569F00CCC516 /* PBXTextBookmark */ = 2D42FE920B6E569F00CCC516 /* PBXTextBookmark */;
-			2D6B88E50B6948CA005CA697 /* PBXTextBookmark */ = 2D6B88E50B6948CA005CA697 /* PBXTextBookmark */;
-			2D6B88E70B6948CA005CA697 /* PBXTextBookmark */ = 2D6B88E70B6948CA005CA697 /* PBXTextBookmark */;
-			2D6B890B0B69524D005CA697 /* PBXTextBookmark */ = 2D6B890B0B69524D005CA697 /* PBXTextBookmark */;
+			2D42FE730B6BB91E00CCC516 = 2D42FE730B6BB91E00CCC516 /* PBXTextBookmark */;
+			2D6B88E50B6948CA005CA697 = 2D6B88E50B6948CA005CA697 /* PBXTextBookmark */;
+			2D6B88E70B6948CA005CA697 = 2D6B88E70B6948CA005CA697 /* PBXTextBookmark */;
+			2D6B890B0B69524D005CA697 = 2D6B890B0B69524D005CA697 /* PBXTextBookmark */;
+			2DD4BC270B70EF3900F0CF49 = 2DD4BC270B70EF3900F0CF49 /* PBXTextBookmark */;
+			2DDB7BC90B723BD000FE1F47 = 2DDB7BC90B723BD000FE1F47 /* PBXTextBookmark */;
+			2DDB7C1B0B724D7100FE1F47 = 2DDB7C1B0B724D7100FE1F47 /* PBXTextBookmark */;
+			2DDB7CF00B72900700FE1F47 = 2DDB7CF00B72900700FE1F47 /* PBXTextBookmark */;
+			2DDB7CF10B72900700FE1F47 = 2DDB7CF10B72900700FE1F47 /* PBXTextBookmark */;
+			2DDB7CF40B72900700FE1F47 = 2DDB7CF40B72900700FE1F47 /* PBXTextBookmark */;
+			2DDB7CF60B72900700FE1F47 = 2DDB7CF60B72900700FE1F47 /* PBXTextBookmark */;
+			2DDB7CF70B72900700FE1F47 = 2DDB7CF70B72900700FE1F47 /* PBXTextBookmark */;
+			2DDB7CF80B72900700FE1F47 = 2DDB7CF80B72900700FE1F47 /* PBXTextBookmark */;
+			2DDB7D150B72923500FE1F47 = 2DDB7D150B72923500FE1F47 /* PBXTextBookmark */;
+			2DDB7D190B72923500FE1F47 = 2DDB7D190B72923500FE1F47 /* PBXTextBookmark */;
+			2DDB7D1A0B72923500FE1F47 = 2DDB7D1A0B72923500FE1F47 /* PBXTextBookmark */;
+			2DDB7D1C0B72923500FE1F47 = 2DDB7D1C0B72923500FE1F47 /* PBXTextBookmark */;
+			2DDB7D1E0B72923D00FE1F47 = 2DDB7D1E0B72923D00FE1F47 /* PBXTextBookmark */;
 		};
 		sourceControlManager = 2D6B88D70B694735005CA697 /* Source Control */;
 		userBuildSettings = {
@@ -207,9 +366,9 @@
 	};
 	886FEE5605D9BD280091015F /* build.xml */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {828, 1022}}";
-			sepNavSelRange = "{2349, 62}";
-			sepNavVisRect = "{{0, 345}, {828, 668}}";
+			sepNavIntBoundsRect = "{{0, 0}, {824, 1582}}";
+			sepNavSelRange = "{271, 0}";
+			sepNavVisRect = "{{0, 30}, {802, 458}}";
 		};
 	};
 	88934D45061E10E600F42905 /* Sneakernet */ = {

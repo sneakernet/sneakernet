@@ -1,24 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project name="Sneakernet" default="jar" basedir=".">
-    <property name="src" location="src"/>
-    <property name="bin" location="bin"/>
-	<property name="classes" location="classes"/>
-	<property name="preverified" location="preverified" />
-    <property name="lib" location="lib"/>
-    <property name="dist" location="dist"/>
-    <property name="jarfile" location="${dist}/${ant.project.name}.jar"/>
+
+	<property name="src" location="src"/>
+	<property name="bin" location="bin"/>
+	<property name="classes" location="build/classes"/>
+	<property name="preverified" location="build/preverified" />
+	<property name="lib" location="lib" />
+	<property name="dist" location="dist"/>
+	<property name="jarfile" location="${dist}/${ant.project.name}.jar"/>
 	<property name="jadfile" location="${dist}/${ant.project.name}.jad"/>
-    <property name="compile.debug" value="true"/>
+	<property name="compile.debug" value="true"/>
 	<property name="resources" location="res"/>
-	
-  <!-- Edit the "mpp" property with the path to your installed mpp-sdk. -->
-  <property name="mpp" value="/Developer/Java/mpp-sdk"/>
-  <property name="mppdev" value="${mpp}"/>
 
+	<!-- Edit the "mpp" property with the path to your installed mpp-sdk. -->	
+	<property name="mpp" value="/Developer/Java/mpp-sdk/"/>
+	<property name="mppdev" value="${mpp}"/>
 
-  <!-- The "preverify" target requires the bootstrap classes. (This is where they live on Mac OS X.) -->
-  <!-- property name="java.classes.jar" value="/System/Library/Frameworks/JavaVM.framework/Classes/classes.jar" -->
-  <property name="java.classes.jar" value="/System/Library/Frameworks/JavaVM.framework/Versions/1.4.2/Classes/classes.jar" />
+	<!-- The following property is needed only for
+	   obufscate_proguard. -->
+	<property name="proguard" value="/Developer/Java/proguard3.7/lib/proguard.jar"/>
+
+	<!-- The "preverify" target requires the bootstrap classes. (This is where they live on Mac OS X.) -->
+	<!-- property name="java.classes.jar" value="/System/Library/Frameworks/JavaVM.framework/Classes/classes.jar" -->
+	<property name="java.classes.jar" value="/System/Library/Frameworks/JavaVM.framework/Versions/1.4.2/Classes/classes.jar" />
+  
+	<!-- The JCE jar, next to the above jar. -->
+	<property name="jce.classes.jar" value="/System/Library/Frameworks/JavaVM.framework/Versions/1.4.2/Classes/jce.jar" />
 
     <fileset id="lib.jars" dir="${lib}">
         <include name="**/*.jar"/>
@@ -28,25 +35,58 @@
         <fileset refid="lib.jars"/>
     </path>
 
-    <target name="compile" description="Compile code">
+	<target name="init">
+		<tstamp/>
+	</target>
+
+	<!-- Unjars the library APIs in preparation for obfuscation. -->
+	<target name="copylib" depends="init">
+	<unjar src="../libraries/bcprov-jdk14-135.jar" dest="build/classes"/>
+	</target>
+
+    <target name="compile" description="Compile code" depends="copylib">
         <mkdir dir="${lib}"/>
 		<mkdir dir="${classes}"/>
         <javac srcdir="${src}" destdir="${classes}" includeAntRuntime="no"
-               classpathref="lib.path" classpath="${mppdev}/cldc.jar:${mppdev}/midp.jar" debug="${compile.debug}">
+               classpathref="lib.path" classpath="${mppdev}/stubs/cldc-1.0.jar:${mppdev}/stubs/midp-1.0.jar" debug="${compile.debug}">
         </javac>
     </target>
-	
-	  <!-- The preverify target is set up for Mac OS X -->
-	  <target name="preverify" depends="compile">
-		<mkdir dir="${preverified}"/>
-		<exec executable="${mppdev}/osx/preverify/preverify">
-		  <arg line="-classpath ${java.classes.jar}:${mppdev}/cldc.jar:${mppdev}/midp.jar"/>	
-		  <arg line="-d '${preverified}'"/>
-		  <arg line="classes"/>
-		</exec>
-	  </target>
-	
 
+	<target name="preverify" depends="obfuscate_proguard">
+		<mkdir dir="build/preverified"/>
+		<exec executable="${mppdev}/osx/preverify/preverify">
+		  <arg line="-classpath ${java.classes.jar}:${jce.classes.jar}:${mppdev}/stubs/cldc-1.0.jar:${mppdev}/stubs/midp-1.0.jar"/>
+		  <arg line="-d build/preverified"/>
+		  <arg line="build/obfuscated"/>
+		  <arg line="-cldc1.0"/>
+		</exec>
+	</target>
+	
+	<!-- Obufscates using ProGuard. -->
+	<target name="obfuscate_proguard" depends="compile">
+	<mkdir dir="build/proguard"/>
+	<jar basedir="build/classes"
+		jarfile="build/proguard/input.jar"/>
+
+	<java fork="yes" classname="proguard.ProGuard"
+		classpath="${proguard}">
+	  <arg line="-libraryjars ${java.classes.jar}"/>
+	  <arg line="-libraryjars ${jce.classes.jar}"/>
+	  <arg line="-libraryjars ${mppdev}/stubs/cldc-1.0.jar:${mppdev}/stubs/midp-1.0.jar"/>
+	  <arg line="-libraryjars ${lib}"/>
+	  <arg line="-injars build/proguard/input.jar"/>
+	  <arg line="-outjar build/proguard/output.jar"/>
+	  <arg line="-keep 'public class * extends javax.microedition.midlet.MIDlet'"/>
+	  <arg line="-defaultpackage"/>
+	  <arg line="-dontusemixedcaseclassnames"/>
+	  <arg line="-ignorewarnings"/>
+	</java>
+
+	<mkdir dir="build/obfuscated"/>
+	<unjar src="build/proguard/output.jar"
+		dest="build/obfuscated"/>
+	</target>
+  
     <target name="jar" depends="preverify" description="Build jar">
         <mkdir dir="${dist}"/>
         <jar jarfile="${jarfile}" basedir="${preverified}" manifest="Manifest">
@@ -56,7 +96,7 @@
         </jar>
 		<copy file="${ant.project.name}.jad" tofile="${jadfile}" />
     </target>
-
+  
     <target name="run" depends="jar" description="Run jar file">
         <java jar="${mppdev}/player.jar" fork="yes" failonerror="true">
 		 <arg value="${dist}/${project}.jad"/>
@@ -69,4 +109,5 @@
 		<delete dir="${classes}" />
 		<delete dir="${preverified}" />
     </target>
+
 </project>
