@@ -29,67 +29,104 @@ int main(int argc, char *argv[])
 	haggle_handle_t haggle_;
 	char *progname = NULL;
 	enum {
-		command_add_interest,
-		command_delete_interest,
-		command_get_interests,
-		command_new_dataobject,
-		command_fail,
-		command_none
-	} command = command_none;
-	char *command_parameter = NULL;
+		action_create,
+		action_show,
+		action_update,
+		action_destroy,
+		action_index,
+		action_fail,
+		action_none
+	} action = action_none;
+	enum {
+		resource_interests,
+		resource_data_objects,
+		resource_none
+	} resource = resource_none;
+	char *action_parameter = NULL;
+	char *resource_parameter = NULL;
 	char *attr_name = NULL;
 	char *attr_value = NULL;
 	long attr_weight = 1;
 	
-	// Parse command-line arguments:
+	// Parse action-line arguments:
 	for(i = 1; i < argc; i++)
 	{
 		if(strcmp(argv[i], "-p") == 0)
 		{
 			i++;
 			progname = argv[i];
-		}else if(command == command_none && strcmp(argv[i], "add") == 0)
+		}
+		
+		else if(action == action_none && strcmp(argv[i], "create") == 0)
 		{
-			command = command_add_interest;
+			action = action_create;
 			i++;
 			if(i < argc)
-				command_parameter = argv[i];
-		}else if(command == command_none && strcmp(argv[i], "del") == 0)
+				action_parameter = argv[i];
+		}
+		else if(action == action_none && strcmp(argv[i], "show") == 0)
 		{
-			command = command_delete_interest;
+			action = action_show;
 			i++;
 			if(i < argc)
-				command_parameter = argv[i];
-		}else if(command == command_none && strcmp(argv[i], "new") == 0)
+				action_parameter = argv[i];
+		}
+		else if(action == action_none && strcmp(argv[i], "update") == 0)
 		{
-			command = command_new_dataobject;
+			action = action_update;
 			i++;
 			if(i < argc)
-				command_parameter = argv[i];
-		}else if(command == command_none && strcmp(argv[i], "get") == 0)
+				action_parameter = argv[i];
+		}
+		else if(action == action_none && strcmp(argv[i], "destroy") == 0)
 		{
-			command = command_get_interests;
-		}else{
+			action = action_destroy;
+			i++;
+			if(i < argc)
+				action_parameter = argv[i];
+		}
+		else if(action == action_none && strcmp(argv[i], "index") == 0)
+		{
+			action = action_index;
+		}
+
+		else if(resource == resource_none && strcmp(argv[i], "interests") == 0)
+		{
+			resource = resource_interests;
+			i++;
+			if(i < argc)
+				resource_parameter = argv[i];
+		}
+		else if(action == action_none && strcmp(argv[i], "data") == 0)
+		{
+			resource = resource_data_objects;
+			i++;
+			if(i < argc)
+				resource_parameter = argv[i];
+		}
+		
+		else
+		{
 			printf("Unrecognized parameter: %s\n", argv[i]);
-			command = command_fail;
+			action = action_fail;
 		}
 	}
 	
 	if(progname == NULL)
 	{
-		progname = (char *) "Haggle command line tool";
+		progname = (char *) "sneakernet";
 	}
 	
-	switch(command)
+	switch(action)
 	{
-		case command_add_interest:
-		case command_delete_interest:
-		case command_new_dataobject:
+		case action_create:
+		case action_destroy:
+		case action_update:
 			// Parse the argument:
-			if(command_parameter != NULL)
+			if(action_parameter != NULL)
 			{
-				attr_name = command_parameter;
-				attr_value = command_parameter;
+				attr_name = action_parameter;
+				attr_value = action_parameter;
 				i = 0;
 				while(attr_name[i] != '=' && attr_name[i] != '\0')
 					i++;
@@ -115,22 +152,21 @@ int main(int argc, char *argv[])
 			}
 			printf("Unable to parse attribute.\n");
 			// Intentional fall-through:
-		case command_none:
-		case command_fail:
+		case action_none:
+		case action_fail:
 			printf(
 "\n"
 "Usage:\n"
-"clitool [-p <name of program>] add <attribute>\n"
-"clitool [-p <name of program>] del <attribute>\n"
-"clitool [-p <name of program>] new <attribute>\n"
-"clitool [-p <name of program>] get\n"
+"driver [-p <name of program>] ACTION <attribute>\n"
 "\n"
-"-p  Allows this program to masquerade as another.\n"
-"add Tries to add <attribute> to the list of interests for this application.\n"
-"del Tries to remove <attribute> from the list of interests for this\n"
-"    application.\n"
-"new Creates and publishes a new data object with the given attribute\n"
-"get Tries to retrieve all interests for this application.\n"
+"-p  Set the program name. (optional)\n"
+"\n"
+"    Actions are:\n"
+"      create   Creates a new resource item and returns an XML representation of it.\n"
+"      show     Show an XML representation of the requested object.\n"
+"      update   Update the specified object using the provided XML representation.\n"
+"      destroy  Destroy the specified object.\n"
+"      index    Get a list of all items of the specified resource."
 "\n"
 "Attributes are specified as such: <name>=<value>[:<weight>]. Name and value\n"
 "are text strings, and weight is an optional integer. Name can of course not\n"
@@ -151,9 +187,9 @@ int main(int argc, char *argv[])
 
 	printf("Connected to Haggle as: %s\n", progname);
 	
-	switch(command)
+	switch(action)
 	{
-		case command_add_interest:
+		case action_create:
 			// Add interest:
 			haggle_ipc_add_application_interest_weighted(
 				haggle_, 
@@ -162,7 +198,7 @@ int main(int argc, char *argv[])
 				attr_weight);
 		break;
 		
-		case command_delete_interest:
+		case action_destroy:
 			// Remove interest:
 			haggle_ipc_remove_application_interest(
 				haggle_,
@@ -170,7 +206,7 @@ int main(int argc, char *argv[])
 				attr_value);
 		break;
 		
-		case command_new_dataobject:
+		case action_update:
 		{
 			struct dataobject *dObj;
 			
@@ -188,7 +224,7 @@ int main(int argc, char *argv[])
 		}
 		break;
 		
-		case command_get_interests:
+		case action_index:
 		{
 			struct attributelist *al;
 			bool not_done;
