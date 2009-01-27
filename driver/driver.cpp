@@ -39,7 +39,7 @@ int main(int argc, char *argv[])
 	} action = action_none;
 	enum {
 		resource_interests,
-		resource_data_objects,
+		resource_data,
 		resource_none
 	} resource = resource_none;
 	char *action_parameter = NULL;
@@ -56,7 +56,16 @@ int main(int argc, char *argv[])
 			i++;
 			progname = argv[i];
 		}
-		
+
+		else if(resource == resource_none && strcmp(argv[i], "interests") == 0)
+		{
+			resource = resource_interests;
+		}
+		else if(resource == resource_none && strcmp(argv[i], "data") == 0)
+		{
+			resource = resource_data;
+		}
+
 		else if(action == action_none && strcmp(argv[i], "create") == 0)
 		{
 			action = action_create;
@@ -88,21 +97,6 @@ int main(int argc, char *argv[])
 		else if(action == action_none && strcmp(argv[i], "index") == 0)
 		{
 			action = action_index;
-		}
-
-		else if(resource == resource_none && strcmp(argv[i], "interests") == 0)
-		{
-			resource = resource_interests;
-			i++;
-			if(i < argc)
-				resource_parameter = argv[i];
-		}
-		else if(action == action_none && strcmp(argv[i], "data") == 0)
-		{
-			resource = resource_data_objects;
-			i++;
-			if(i < argc)
-				resource_parameter = argv[i];
 		}
 		
 		else
@@ -157,20 +151,32 @@ int main(int argc, char *argv[])
 			printf(
 "\n"
 "Usage:\n"
-"driver [-p <name of program>] ACTION <attribute>\n"
+"driver [-p <name of program>] RESOURCE ACTION <attribute>\n"
 "\n"
 "-p  Set the program name. (optional)\n"
 "\n"
 "    Actions are:\n"
-"      create   Creates a new resource item and returns an XML representation of it.\n"
-"      show     Show an XML representation of the requested object.\n"
-"      update   Update the specified object using the provided XML representation.\n"
-"      destroy  Destroy the specified object.\n"
-"      index    Get a list of all items of the specified resource."
+"      create     Creates a new resource item and returns an XML representation of it.\n"
+"      show       Show an XML representation of the requested item.\n"
+"      update     Update the specified item using the provided XML representation.\n"
+"      destroy    Destroy the specified item.\n"
+"      index      Get a list of all items of the specified resource.\n"
+"\n"
+"    Resources are:\n"
+"      interests  Haggle network interests.\n"
+"      data       Data objects.\n"
 "\n"
 "Attributes are specified as such: <name>=<value>[:<weight>]. Name and value\n"
-"are text strings, and weight is an optional integer. Name can of course not\n"
-"include an '=' character.\n");
+"are text strings, and weight is an optional integer.  Name can of course not\n"
+"include an '=' character.\n"
+"\n"
+"    Examples:\n"
+"\n"
+"      driver interests index\n"
+"      driver interests create type=message\n"
+"      driver interests destroy type=message\n"
+"      driver data index\n"
+"      driver data create type=message\n");
 			
 			return 1;
 		break;
@@ -187,76 +193,92 @@ int main(int argc, char *argv[])
 
 	printf("Connected to Haggle as: %s\n", progname);
 	
-	switch(action)
+	switch(resource)
 	{
-		case action_create:
-			// Add interest:
-			haggle_ipc_add_application_interest_weighted(
-				haggle_, 
-				attr_name, 
-				attr_value,
-				attr_weight);
-		break;
-		
-		case action_destroy:
-			// Remove interest:
-			haggle_ipc_remove_application_interest(
-				haggle_,
-				attr_name, 
-				attr_value);
-		break;
-		
-		case action_update:
+		case resource_interests:
+		switch(action)
 		{
-			struct dataobject *dObj;
-			
-			// New data object:
-			dObj = haggle_dataobject_new();
-			
-			// Add attribute:
-			haggle_dataobject_add_attribute(
-				dObj, 
-				attr_name, 
-				attr_value);
-			
-			// Publish:
-			haggle_ipc_publish_dataobject(haggle_, dObj);
-		}
-		break;
+			case action_create:
+				// Add interest:
+				haggle_ipc_add_application_interest_weighted(
+					haggle_, 
+					attr_name, 
+					attr_value,
+					attr_weight);
+				printf("Created interest: %s=%s:%ld\n",
+					attr_name,
+					attr_value,
+					attr_weight);
+			break;
 		
-		case action_index:
-		{
-			struct attributelist *al;
-			bool not_done;
-			
-			// Get interests:
-			haggle_ipc_get_application_interests_sync(haggle_, &al);
-			
-			// Loop through and list interests:
-			not_done = true;
-			i = 0;
-			while(not_done)
+			case action_destroy:
+				// Remove interest:
+				haggle_ipc_remove_application_interest(
+					haggle_,
+					attr_name, 
+					attr_value);
+				printf("Destroyed interest: %s=%s\n",
+					attr_name,
+					attr_value);
+			break;
+		
+			case action_index:
 			{
-				attribute	*a;
-				
-				a = haggle_attributelist_get_attribute_n(al, i);
-				if(a == NULL)
+				struct attributelist *al;
+				bool not_done;
+			
+				// Get interests:
+				haggle_ipc_get_application_interests_sync(haggle_, &al);
+			
+				// Loop through and list interests:
+				not_done = true;
+				i = 0;
+				while(not_done)
 				{
-					not_done = false;
-				}else{
-					printf("Interest: %s=%s:%ld\n",
-						haggle_attribute_get_name(a),
-						haggle_attribute_get_value(a),
-						haggle_attribute_get_weight(a));
-					i++;
+					attribute	*a;
+				
+					a = haggle_attributelist_get_attribute_n(al, i);
+					if(a == NULL)
+					{
+						not_done = false;
+					}else{
+						printf("Interest: %s=%s:%ld\n",
+							haggle_attribute_get_name(a),
+							haggle_attribute_get_value(a),
+							haggle_attribute_get_weight(a));
+						i++;
+					}
 				}
 			}
+			break;
+		
+			// Shouldn't be able to get here:
+			default:
+			break;
 		}
 		break;
 		
-		// Shouldn't be able to get here:
-		default:
-		break;
+		case resource_data:
+		switch(action)
+		{
+			case action_create:
+			{
+				struct dataobject *dObj;
+			
+				// New data object:
+				dObj = haggle_dataobject_new();
+			
+				// Add attribute:
+				haggle_dataobject_add_attribute(
+					dObj, 
+					attr_name, 
+					attr_value);
+			
+				// Publish:
+				haggle_ipc_publish_dataobject(haggle_, dObj);
+			}
+			break;
+		}
 	}
 
 	retval = 0;
