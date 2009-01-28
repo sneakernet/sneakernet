@@ -192,8 +192,6 @@ int main(int argc, char *argv[])
 	// Find Haggle:
 	if(haggle_handle_get(progname, &haggle_) != haggle_no_error)
 		goto fail_haggle;
-
-	printf("Connected to Haggle as: %s\n", progname);
 	
 	switch(resource)
 	{
