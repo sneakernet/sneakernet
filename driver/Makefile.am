@@ -1,5 +1,5 @@
 bin_PROGRAMS=driver
-driver_SOURCES=driver.cpp
+driver_SOURCES=xml.cpp driver.cpp
 
 CPPFLAGS += -I$(top_builddir)/src/libhaggle/include 
 CPPFLAGS += -I$(top_builddir)/src/utils 

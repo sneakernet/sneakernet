@@ -13,9 +13,6 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-// #include <libxml/encoding.h>
-// #include <libxml/xmlwriter.h>
-
 #include <libhaggle/haggle.h>
 
 #include <stdio.h>
@@ -25,9 +22,7 @@
 #include <signal.h>
 #endif
 
-// #define MY_ENCODING "ISO-8859-1"
-
-// void printInterestAsXML(char *attr_name, char *attr_value, long attr_weight);
+#include "./xml.h"
 
 int main(int argc, char *argv[])
 {
@@ -216,7 +211,7 @@ int main(int argc, char *argv[])
 					attr_name,
 					attr_value,
 					attr_weight);
-				// printInterestAsXML(attr_name, attr_value, attr_weight);
+				printInterestAsXML(attr_name, attr_value, attr_weight);
 			break;
 		
 			case action_destroy:
@@ -296,71 +291,3 @@ int main(int argc, char *argv[])
 fail_haggle:
 	return retval;
 }
-
-// void printInterestAsXML(char *attr_name, char *attr_value, long attr_weight)
-// {
-//     int rc;
-//     xmlTextWriterPtr writer;
-//     xmlBufferPtr buf;
-// 
-// 	printf("Printing as XML:");
-// 
-//     /* Create a new XML buffer, to which the XML document will be
-//      * written */
-//     buf = xmlBufferCreate();
-//     if (buf == NULL) {
-//         printf("testXmlwriterMemory: Error creating the xml buffer\n");
-//         return;
-//     }
-// 
-//     /* Create a new XmlWriter for memory, with no compression.
-//      * Remark: there is no compression for this kind of xmlTextWriter */
-//     writer = xmlNewTextWriterMemory(buf, 0);
-//     if (writer == NULL) {
-//         printf("testXmlwriterMemory: Error creating the xml writer\n");
-//         return;
-//     }
-// 
-//     /* Start the document with the xml default for the version,
-//      * encoding ISO 8859-1 and the default for the standalone
-//      * declaration. */
-//     rc = xmlTextWriterStartDocument(writer, NULL, MY_ENCODING, NULL);
-//     if (rc < 0) {
-//         printf
-//             ("testXmlwriterMemory: Error at xmlTextWriterStartDocument\n");
-//         return;
-//     }
-// 
-//     /* Start an element named "EXAMPLE". Since thist is the first
-//      * element, this will be the root element of the document. */
-//     rc = xmlTextWriterStartElement(writer, BAD_CAST "EXAMPLE");
-//     if (rc < 0) {
-//         printf
-//             ("testXmlwriterMemory: Error at xmlTextWriterStartElement\n");
-//         return;
-//     }
-// 
-//     /* Here we could close the elements ORDER and EXAMPLE using the
-//      * function xmlTextWriterEndElement, but since we do not want to
-//      * write any other elements, we simply call xmlTextWriterEndDocument,
-//      * which will do all the work. */
-//     rc = xmlTextWriterEndDocument(writer);
-//     if (rc < 0) {
-//         printf("testXmlwriterMemory: Error at xmlTextWriterEndDocument\n");
-//         return;
-//     }
-// 
-//     xmlFreeTextWriter(writer);
-// 
-//     // fp = fopen(file, "w");
-//     // if (fp == NULL) {
-//     //     printf("testXmlwriterMemory: Error at fopen\n");
-//     //     return;
-//     // }
-// 
-//     printf("%s", (const char *) buf->content);
-// 
-//     // fclose(fp);
-// 
-//     xmlBufferFree(buf);
-// }
