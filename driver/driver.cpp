@@ -207,10 +207,10 @@ int main(int argc, char *argv[])
 					attr_name, 
 					attr_value,
 					attr_weight);
-				printf("Created interest: %s=%s:%ld\n",
-					attr_name,
-					attr_value,
-					attr_weight);
+				// printf("Created interest: %s=%s:%ld\n",
+				// 	attr_name,
+				// 	attr_value,
+				// 	attr_weight);
 				printInterestAsXML(attr_name, attr_value, attr_weight);
 			break;
 		
