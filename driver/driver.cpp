@@ -118,6 +118,7 @@ int main(int argc, char *argv[])
 		case action_create:
 		case action_destroy:
 		case action_update:
+		case action_show:
 			// Parse the argument:
 			if(action_parameter != NULL)
 			{
@@ -199,6 +200,7 @@ int main(int argc, char *argv[])
 		switch(action)
 		{
 			case action_create:
+			case action_update: // Update is really the same as create for Haggle interests.
 				// Add interest:
 				haggle_ipc_add_application_interest_weighted(
 					haggle_, 
@@ -208,7 +210,42 @@ int main(int argc, char *argv[])
 				printInterestAsXML(attr_name, attr_value, attr_weight);
 				endXML();
 			break;
-		
+
+			case action_show:
+			{
+				struct attributelist *al;
+				bool not_done;
+			
+				// Get interests:
+				haggle_ipc_get_application_interests_sync(haggle_, &al);
+			
+				// Loop through and list interests:
+				not_done = true;
+				i = 0;
+				while(not_done)
+				{
+					attribute	*attr;
+				
+					attr = haggle_attributelist_get_attribute_n(al, i);
+					if(attr == NULL)
+					{
+						not_done = false;
+					}else{							
+						char *name = (char *)haggle_attribute_get_name(attr);
+						char *value = (char *)haggle_attribute_get_value(attr);
+						int weight = haggle_attribute_get_weight(attr);
+						if(strcmp(name, attr_name)==0 && strcmp(value, attr_value)==0)
+							printInterestAsXML(
+								name,
+								value,
+								weight);
+						i++;
+					}
+				}
+				endXML();
+			}
+			break;
+					
 			case action_destroy:
 				// Remove interest:
 				haggle_ipc_remove_application_interest(
