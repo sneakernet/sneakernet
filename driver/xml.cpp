@@ -21,80 +21,101 @@
 
 #define MY_ENCODING "ISO-8859-1"
 
-void printInterestAsXML(char *attr_name, char *attr_value, long attr_weight)
+xmlTextWriterPtr writer = NULL;
+xmlBufferPtr buf = NULL;
+
+void startXML()
 {
-    int rc;
-    xmlTextWriterPtr writer;
-    xmlBufferPtr buf;
+	int rc;
 
-    /* Create a new XML buffer, to which the XML document will be
-     * written */
-    buf = xmlBufferCreate();
-    if (buf == NULL) {
-        printf("testXmlwriterMemory: Error creating the xml buffer\n");
-        return;
-    }
+	/* Create a new XML buffer, to which the XML document will be
+	 * written */
+	buf = xmlBufferCreate();
+	if (buf == NULL) {
+	    printf("Error creating the xml buffer\n");
+	    return;
+	}
 
-    /* Create a new XmlWriter for memory, with no compression.
-     * Remark: there is no compression for this kind of xmlTextWriter */
-    writer = xmlNewTextWriterMemory(buf, 0);
-    if (writer == NULL) {
-        printf("testXmlwriterMemory: Error creating the xml writer\n");
-        return;
-    }
+	/* Create a new XmlWriter for memory, with no compression.
+	 * Remark: there is no compression for this kind of xmlTextWriter */
+	writer = xmlNewTextWriterMemory(buf, 0);
+	if (writer == NULL) {
+	    printf("Error creating the xml writer\n");
+	    return;
+	}
 
-    /* Start the document with the xml default for the version,
-     * encoding ISO 8859-1 and the default for the standalone
-     * declaration. */
-    rc = xmlTextWriterStartDocument(writer, NULL, MY_ENCODING, NULL);
-    if (rc < 0) {
-        printf
-            ("testXmlwriterMemory: Error at xmlTextWriterStartDocument\n");
-        return;
-    }
+	/* Start the document with the xml default for the version,
+	 * encoding ISO 8859-1 and the default for the standalone
+	 * declaration. */
+	rc = xmlTextWriterStartDocument(writer, NULL, MY_ENCODING, NULL);
+	if (rc < 0) {
+	    printf
+	        ("Error at xmlTextWriterStartDocument\n");
+	    return;
+	}
+}
 
-    rc = xmlTextWriterStartElement(writer, BAD_CAST "interest");
-    if (rc < 0) {
-        printf
-            ("testXmlwriterMemory: Error at xmlTextWriterStartElement\n");
-        return;
-    }
+void endXML()
+{
+		int rc;
+		
+	    /* Here we could close the elements ORDER and EXAMPLE using the
+	     * function xmlTextWriterEndElement, but since we do not want to
+	     * write any other elements, we simply call xmlTextWriterEndDocument,
+	     * which will do all the work. */
+	    rc = xmlTextWriterEndDocument(writer);
+	    if (rc < 0) {
+	        printf("Error at xmlTextWriterEndDocument\n");
+	        return;
+	    }
+	
+	    xmlFreeTextWriter(writer);
+	
+	    printf("%s\n", (const char *) buf->content);
+	
+	    xmlBufferFree(buf);
+}
 
+void printInterestAsXML(char *attr_name, char *attr_value, long attr_weight)
+{	
+	int rc;
+	
+	if (buf == NULL) { startXML(); }
+	
+	rc = xmlTextWriterStartElement(writer, BAD_CAST "interest");
+	if (rc < 0) {
+	    printf
+	        ("Error at xmlTextWriterStartElement\n");
+	    return;
+	}
+	
 	rc = xmlTextWriterWriteAttribute(writer, BAD_CAST "name", BAD_CAST attr_name);
-    if (rc < 0) {
-        printf
-            ("testXmlwriterFilename: Error at xmlTextWriterWriteAttribute\n");
-        return;
-    }
-
+	if (rc < 0) {
+	    printf
+	        ("Error at xmlTextWriterWriteAttribute\n");
+	    return;
+	}
+	
 	rc = xmlTextWriterWriteAttribute(writer, BAD_CAST "value", BAD_CAST attr_value);
+	if (rc < 0) {
+	    printf
+	        ("Error at xmlTextWriterWriteAttribute\n");
+	    return;
+	}
+	
+	char weight_buf[5];
+	sprintf(weight_buf,"%d",attr_weight);
+	rc = xmlTextWriterWriteAttribute(writer, BAD_CAST "weight", BAD_CAST weight_buf);
     if (rc < 0) {
         printf
-            ("testXmlwriterFilename: Error at xmlTextWriterWriteAttribute\n");
+            ("Error at xmlTextWriterWriteAttribute\n");
         return;
     }
 
-	// Why does this blow up?
-	// rc = xmlTextWriterWriteAttribute(writer, BAD_CAST "weight", BAD_CAST attr_weight);
-	//     if (rc < 0) {
-	//         printf
-	//             ("testXmlwriterFilename: Error at xmlTextWriterWriteAttribute\n");
-	//         return;
-	//     }
-
-    /* Here we could close the elements ORDER and EXAMPLE using the
-     * function xmlTextWriterEndElement, but since we do not want to
-     * write any other elements, we simply call xmlTextWriterEndDocument,
-     * which will do all the work. */
-    rc = xmlTextWriterEndDocument(writer);
+	rc = xmlTextWriterEndElement(writer);
     if (rc < 0) {
-        printf("testXmlwriterMemory: Error at xmlTextWriterEndDocument\n");
+        printf
+            ("Error at xmlTextWriterEndElement\n");
         return;
     }
-
-    xmlFreeTextWriter(writer);
-
-    printf("%s\n", (const char *) buf->content);
-
-    xmlBufferFree(buf);
 }

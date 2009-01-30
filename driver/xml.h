@@ -14,3 +14,4 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 void printInterestAsXML(char *attr_name, char *attr_value, long attr_weight);
+void endXML();

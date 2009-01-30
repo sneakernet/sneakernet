@@ -22,7 +22,7 @@
 #include <signal.h>
 #endif
 
-#include "./xml.h"
+#include "xml.h"
 
 int main(int argc, char *argv[])
 {
@@ -205,11 +205,8 @@ int main(int argc, char *argv[])
 					attr_name, 
 					attr_value,
 					attr_weight);
-				// printf("Created interest: %s=%s:%ld\n",
-				// 	attr_name,
-				// 	attr_value,
-				// 	attr_weight);
 				printInterestAsXML(attr_name, attr_value, attr_weight);
+				endXML();
 			break;
 		
 			case action_destroy:
@@ -242,14 +239,18 @@ int main(int argc, char *argv[])
 					if(attr == NULL)
 					{
 						not_done = false;
-					}else{
-						printf("Interest: %s=%s:%ld\n",
-							haggle_attribute_get_name(attr),
-							haggle_attribute_get_value(attr),
-							haggle_attribute_get_weight(attr));
+					}else{							
+						char *name = (char *)haggle_attribute_get_name(attr);
+						char *value = (char *)haggle_attribute_get_value(attr);
+						int weight = haggle_attribute_get_weight(attr);
+						printInterestAsXML(
+							name,
+							value,
+							weight);
 						i++;
 					}
 				}
+				endXML();
 			}
 			break;
 		
